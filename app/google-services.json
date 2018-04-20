@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "260713064829",
+    "firebase_url": "https://easypaper-72563.firebaseio.com",
+    "project_id": "easypaper-72563",
+    "storage_bucket": "easypaper-72563.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260713064829:android:a81a805b35dc78be",
+        "android_client_info": {
+          "package_name": "com.upb.ti.easypaper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260713064829-2aaosnedr1p6sbu6scqdst6guv99klap.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.upb.ti.easypaper",
+            "certificate_hash": "0a6912902f068393497324fb65e37fa35a9e5711"
+          }
+        },
+        {
+          "client_id": "260713064829-12qi57u3ouf4jqs34o802otrvsfudo9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArg1Kh72o5nUnEO-04QNsb7bIMmErqRFA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260713064829-12qi57u3ouf4jqs34o802otrvsfudo9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
