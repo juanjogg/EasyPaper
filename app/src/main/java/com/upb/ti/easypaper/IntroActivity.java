@@ -21,7 +21,7 @@ public class IntroActivity extends AppCompatActivity {
                 startActivity(intro);
                 finish();
             }
-        },3000);
+        },2000);
 
     }
 }
