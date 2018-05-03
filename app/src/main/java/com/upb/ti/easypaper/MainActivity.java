@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private EditText etName;
     private EditText etUbication;
-    private EditText etDisp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,22 +52,23 @@ public class MainActivity extends AppCompatActivity {
         map.put("Nombre",etName.getText().toString().trim());
         map.put("Ubicacion",etUbication.getText().toString().trim());
 
-
-        mDatabase.child("Papelerias").push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mDatabase.child("Papelerias").push().setValue(new Papeleria(etName.getText().toString(),etUbication.getText().toString(),"Alta")).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(MainActivity.this,"Los datos se han almacenado",Toast.LENGTH_SHORT).show();
                     MainActivity.this.etName.setText("");
                     MainActivity.this.etUbication.setText("");
-
                 }
-                else{
+                else {
                     Toast.makeText(MainActivity.this,"Ha ocurrido un error",Toast.LENGTH_SHORT).show();
-
                 }
+
             }
         });
+
+
+
 
 
 

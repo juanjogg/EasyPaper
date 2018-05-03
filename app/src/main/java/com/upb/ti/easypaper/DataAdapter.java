@@ -14,7 +14,9 @@ import java.util.ArrayList;
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder> {
     private String[] dataSet;
     private ArrayList<Papeleria> papelerias;
-    protected static String idPapeleria;
+
+    protected static Papeleria papeleriaStac;
+
 
     public DataAdapter(String[] dataSet){
         this.dataSet = dataSet;
@@ -35,11 +37,13 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder> {
         //holder.txtView.setText(dataSet[position]);
         final Papeleria papeleria = papelerias.get(position);
         holder.txtNombre.setText(papeleria.getNombre());
+        holder.txtDisponibilidad.setText("Disponibilidad: "+papeleria.getDisponibilidad());
         holder.txtUbicacion.setText(papeleria.getUbicacion());
         holder.botonVm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                idPapeleria = papeleria.getIdPapeleria();
+                papeleriaStac = papeleria;
+
                 Intent intento = new Intent(view.getContext(),PapeleriaGralActivity.class);
                 view.getContext().startActivity(intento);
             }
@@ -54,7 +58,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder> {
 
     public static class viewHolder extends RecyclerView.ViewHolder{
         public CardView cardView;
-        public TextView txtNombre , txtUbicacion;
+        public TextView txtNombre , txtUbicacion, txtDisponibilidad;
         private Button botonVm;
         public viewHolder(CardView itemView) {
             super(itemView);
@@ -62,7 +66,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder> {
             txtNombre = itemView.findViewById(R.id.txtNombrePapeleria);
             txtUbicacion = itemView.findViewById(R.id.txtUbicacion);
             botonVm = itemView.findViewById(R.id.btnVm);
-
+            txtDisponibilidad = itemView.findViewById(R.id.txtDisponibilidad);
         }
 
     }

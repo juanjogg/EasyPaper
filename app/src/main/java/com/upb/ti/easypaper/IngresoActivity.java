@@ -64,7 +64,7 @@ public class IngresoActivity extends AppCompatActivity{
             }
         });
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -121,23 +121,30 @@ public class IngresoActivity extends AppCompatActivity{
         db.orderByKey().addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                boolean b = true;
-                String nombre = "",ubicacion = "";
+
+                int b = 0;
+                String nombre = "",ubicacion = "", disponibilidad = "";
                 //Papeleria papeleria = new Papeleria(dataSnapshot.getKey().toString(),dataSnapshot.getValue().toString());
                 String idPapeleria = dataSnapshot.getKey();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    if(b){
-                        nombre = ds.getValue().toString();
-                        b = false;
+                    if(b == 0){
+                        disponibilidad = ds.getValue().toString();
+                        b++;
                     }
-                    else{
+                    else if(b == 1){
+                        nombre = ds.getValue().toString();
+                        b++;
+
+                    }
+                    else {
+                        b = 0;
+                        Log.i("Dispo",ds.getValue().toString());
                         ubicacion = ds.getValue().toString();
-                        b = true;
                     }
 
 
                 }
-                Papeleria papeleria = new Papeleria(nombre,ubicacion,idPapeleria);
+                Papeleria papeleria = new Papeleria(nombre,ubicacion,idPapeleria,disponibilidad);
                 callback.onComplete(papeleria);
 
 

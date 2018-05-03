@@ -25,7 +25,8 @@
             android:name=".IngresoActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ConfigActivity" />
-        <activity android:name=".PapeleriaGralActivity"></activity>
+        <activity android:name=".PapeleriaGralActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
