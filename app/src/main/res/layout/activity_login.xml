@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="109dp"
+        android:layout_marginTop="203dp"
         android:text="E-mail"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -21,9 +21,9 @@
         android:id="@+id/tv_usuario"
         android:layout_width="289dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="242dp"
         android:ems="10"
         android:inputType="text" />
 
@@ -31,9 +31,9 @@
         android:id="@+id/tv_Password"
         android:layout_width="289dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tv_usuario"
-        android:layout_below="@+id/textView4"
-        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="176dp"
         android:ems="10"
         android:inputType="textPassword" />
 
@@ -41,19 +41,19 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="232dp"
         android:text="Contraseña"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btn_Ingresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView4"
-        android:layout_below="@+id/tv_Password"
-        android:layout_marginTop="38dp"
+        android:layout_alignTop="@+id/btn_Salir"
+        android:layout_centerHorizontal="true"
         android:background="@android:color/background_dark"
         android:text="Ingresar"
         android:textColor="@android:color/white" />
@@ -62,9 +62,9 @@
         android:id="@+id/btn_Salir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView4"
-        android:layout_below="@+id/tv_Password"
-        android:layout_marginTop="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="93dp"
         android:background="@android:color/background_dark"
         android:text="Cerrar sesión"
         android:textColor="@android:color/white" />
@@ -75,10 +75,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="cursive"
         android:text="Ingreso"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="91dp"
+        app:srcCompat="@drawable/logointro" />
 
 </RelativeLayout>

@@ -1,4 +1,5 @@
 package com.upb.ti.easypaper;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -77,6 +78,9 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(getApplicationContext(),"CORRECTO",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getBaseContext(),PapeleriaGralActivity.class);
+                        finish();
+                        startActivity(intent);
                     }
                     else{
                         Toast.makeText(getApplicationContext(),"INCORRECTO",Toast.LENGTH_SHORT).show();
@@ -84,10 +88,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+        else{
+            Toast.makeText(this,"Ningun campo debe estar vacio",Toast.LENGTH_SHORT);
+        }
     }
     @Override
     public void onStart(){
         super.onStart();
+        btnIngresar.setVisibility(View.VISIBLE);
+        btnSalir.setVisibility(View.INVISIBLE);
         mAuth.addAuthStateListener(listener);
 
     }

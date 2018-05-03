@@ -1,32 +1,22 @@
 package com.upb.ti.easypaper;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Logger;
-import com.google.firebase.database.ValueEventListener;
-
-
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class IngresoActivity extends AppCompatActivity{
     //final FirebaseDatabase fireBase = FirebaseDatabase.getInstance();
@@ -34,6 +24,8 @@ public class IngresoActivity extends AppCompatActivity{
     private DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference();
     private ImageView imgEng;
     private TextView txtPapelerias;
+    private FirebaseAuth mAuth;
+
 //    private Thread t1 = new Thread(this,"Thread Consulta");
 
  //   private Thread t2 = new Thread(this,"Thread Adapter");
@@ -64,11 +56,11 @@ public class IngresoActivity extends AppCompatActivity{
             }
         });
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        imgEng = findViewById(R.id.imgEngranaje);
+        imgEng = findViewById(R.id.imgLogin);
         rvPapelerias = findViewById(R.id.rvPapelerias);
         rvPapelerias.setHasFixedSize(true);
         rvManager = new LinearLayoutManager(this);
@@ -77,14 +69,17 @@ public class IngresoActivity extends AppCompatActivity{
         rvAdapter = new DataAdapter(this.papelerias);
         rvPapelerias.setAdapter(rvAdapter);
         Log.d("Fin","Ya termine el onCreate");
-        //consularPapelerias(fireBase);
-        //consultarPapelerias(fireBase);
+        mAuth = FirebaseAuth.getInstance();
+
+        
+
 
 
         this.imgEng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent conf = new Intent(IngresoActivity.this,ConfigActivity.class);
+
+                Intent conf = new Intent(IngresoActivity.this,LoginActivity.class);
                 startActivity(conf);
             }
         });
@@ -128,6 +123,7 @@ public class IngresoActivity extends AppCompatActivity{
                 String idPapeleria = dataSnapshot.getKey();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     if(b == 0){
+
                         disponibilidad = ds.getValue().toString();
                         b++;
                     }
@@ -203,5 +199,26 @@ public class IngresoActivity extends AppCompatActivity{
     }
     */
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            updateUI(user);
+        }
+
+    }
+
+    public void updateUI(FirebaseUser user){
+        this.imgEng.setImageResource(R.drawable.logout);
+        this.imgEng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                finish();
+                startActivity(getIntent());
+            }
+        });
+    }
 
 }

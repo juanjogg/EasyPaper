@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,12 +17,14 @@ public class PapeleriaGralActivity extends AppCompatActivity {
     private TextView nombrePap;
     DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     final Papeleria papeleria = DataAdapter.papeleriaStac;
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_papeleria_gral);
         nombrePap = findViewById(R.id.nombrePap);
-        nombrePap.setText(papeleria.getNombre());
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
     public void obtenerServicios(){
@@ -53,5 +57,21 @@ public class PapeleriaGralActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            updateUI(user);
+        }
+        else{
+            nombrePap.setText(papeleria.getNombre());
+        }
+    }
+
+    public void updateUI(FirebaseUser user){
+        
     }
 }
