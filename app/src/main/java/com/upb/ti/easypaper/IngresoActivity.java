@@ -23,6 +23,7 @@ public class IngresoActivity extends AppCompatActivity{
 
     private DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference();
     private ImageView imgEng;
+    private ImageView imgActualizar;
     private TextView txtPapelerias;
     private FirebaseAuth mAuth;
 
@@ -61,6 +62,7 @@ public class IngresoActivity extends AppCompatActivity{
             e.printStackTrace();
         }
         imgEng = findViewById(R.id.imgLogin);
+        imgActualizar = findViewById(R.id.imgReload);
         rvPapelerias = findViewById(R.id.rvPapelerias);
         rvPapelerias.setHasFixedSize(true);
         rvManager = new LinearLayoutManager(this);
@@ -70,7 +72,13 @@ public class IngresoActivity extends AppCompatActivity{
         rvPapelerias.setAdapter(rvAdapter);
         Log.d("Fin","Ya termine el onCreate");
         mAuth = FirebaseAuth.getInstance();
-
+        this.imgActualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
         
 
 
@@ -107,8 +115,6 @@ public class IngresoActivity extends AppCompatActivity{
             }
         });
 
-    }
-
 */
     public void consultarPapelerias(final Callback callback){
         DatabaseReference db = this.dataBase.child("Papelerias");
@@ -118,29 +124,29 @@ public class IngresoActivity extends AppCompatActivity{
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 int b = 0;
-                String nombre = "",ubicacion = "", disponibilidad = "";
+                String nombre = "",ubicacion = "", disponibilidad = "", uid = "", horario = "";
                 //Papeleria papeleria = new Papeleria(dataSnapshot.getKey().toString(),dataSnapshot.getValue().toString());
                 String idPapeleria = dataSnapshot.getKey();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    if(b == 0){
-
-                        disponibilidad = ds.getValue().toString();
-                        b++;
+                    switch (ds.getKey()){
+                        case "nombre":
+                            nombre = ds.getValue().toString();
+                        break;
+                        case "disponibilidad":
+                            disponibilidad = ds.getValue().toString();
+                        break;
+                        case "ubicacion":
+                            ubicacion = ds.getValue().toString();
+                        break;
+                        case "uid":
+                            uid = ds.getValue().toString();
+                        break;
+                        case "horario":
+                            horario = ds.getValue().toString();
+                        break;
                     }
-                    else if(b == 1){
-                        nombre = ds.getValue().toString();
-                        b++;
-
-                    }
-                    else {
-                        b = 0;
-                        Log.i("Dispo",ds.getValue().toString());
-                        ubicacion = ds.getValue().toString();
-                    }
-
-
                 }
-                Papeleria papeleria = new Papeleria(nombre,ubicacion,idPapeleria,disponibilidad);
+                Papeleria papeleria = new Papeleria(nombre,ubicacion,horario,idPapeleria,disponibilidad,uid);
                 callback.onComplete(papeleria);
 
 
@@ -202,10 +208,13 @@ public class IngresoActivity extends AppCompatActivity{
     @Override
     public void onStart(){
         super.onStart();
+
+
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null){
             updateUI(user);
         }
+
 
     }
 
@@ -221,4 +230,11 @@ public class IngresoActivity extends AppCompatActivity{
         });
     }
 
+    
+
+
+
+
+
 }
+                                                                                       

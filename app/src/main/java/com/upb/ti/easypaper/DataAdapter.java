@@ -12,15 +12,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.viewHolder> {
-    private String[] dataSet;
+
     private ArrayList<Papeleria> papelerias;
 
     protected static Papeleria papeleriaStac;
 
 
-    public DataAdapter(String[] dataSet){
-        this.dataSet = dataSet;
-    }
+
     public DataAdapter(ArrayList<Papeleria> papelerias){
         this.papelerias = papelerias;
     }

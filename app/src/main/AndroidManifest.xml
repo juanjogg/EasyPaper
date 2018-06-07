@@ -24,9 +24,13 @@
         <activity
             android:name=".IngresoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ConfigActivity" />
-        <activity android:name=".PapeleriaGralActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".ConfigActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".PapeleriaGralActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity" android:screenOrientation="portrait"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
